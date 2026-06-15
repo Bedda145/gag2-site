@@ -71,4 +71,4 @@ This is a two-person project. If you're picking it up:
 ## 👥 Authors
 
 - **Kristoffer** — [@Bedda145](https://github.com/Bedda145)
-- **Sigge** — [@friend-github-handle](https://github.com/Siggeeeo)
+- **Sigge** — [@Siggeeeo](https://github.com/Siggeeeo)
