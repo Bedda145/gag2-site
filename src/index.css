@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* page background: deep green-black, NOT brown */
+  --color-night-950: #0c0f0d;
+  --color-night-900: #121713;
+
+  /* bark browns: panels only */
+  --color-bark-900: #221710;
+  --color-bark-800: #2f2117;
+  --color-bark-700: #443122;
+  --color-bark-600: #5a4230;
+
+  --color-leaf: #6cdc70;
+  --color-leaf-dim: #3a8a44;
+  --color-cream: #f5efe2;
+
+  --font-display: "Fredoka", sans-serif;
+  --font-body: "Nunito", sans-serif;
+}
+
+body {
+  background-color: var(--color-night-950);
+  background-image:
+    radial-gradient(900px 500px at 75% -50px, rgb(108 220 112 / 0.06), transparent 70%),
+    repeating-linear-gradient(45deg, transparent 0 16px, rgb(255 255 255 / 0.012) 16px 32px),
+    repeating-linear-gradient(-45deg, transparent 0 16px, rgb(255 255 255 / 0.012) 16px 32px);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+}
+
+/* chunky game-style panel */
+.plate {
+  border: 2px solid var(--color-bark-700);
+  border-radius: 1rem;
+  background-color: var(--color-bark-900);
+  box-shadow: 0 5px 0 0 var(--color-night-950), 0 5px 0 2px var(--color-bark-700);
+}
+
+.plate-interactive {
+  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+.plate-interactive:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-leaf-dim);
+  box-shadow: 0 8px 0 0 var(--color-night-950), 0 8px 0 2px var(--color-leaf-dim);
+}
+.plate-interactive:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 0 var(--color-night-950), 0 1px 0 2px var(--color-bark-700);
+}
+
+/* game-style rarity badge: solid color, white outlined text,
+   diamond crosshatch overlay, hard shadow */
+.rarity-badge {
+  position: relative;
+  display: inline-block;
+  padding: 0.3rem 0.3rem;
+  border: 2px solid;
+  border-radius: 0.4rem;
+  max-width: 100%;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+  line-height: 1.2;
+  text-shadow:
+    -1px -1px 0 rgb(0 0 0 / 0.45),
+     1px -1px 0 rgb(0 0 0 / 0.45),
+    -1px  1px 0 rgb(0 0 0 / 0.45),
+     1px  2px 0 rgb(0 0 0 / 0.55);
+  box-shadow: 0 3px 0 rgb(0 0 0 / 0.4);
+}
+
+.rarity-badge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 5px, rgb(255 255 255 / 0.09) 5px 10px),
+    repeating-linear-gradient(-45deg, transparent 0 5px, rgb(255 255 255 / 0.09) 5px 10px);
+  pointer-events: none;
+}
+
+.rarity-badge.rarity-super {
+  border-color: #ffffff;
+}
+
+@keyframes super-shift {
+  to { background-position: 200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rarity-badge.rarity-super { animation: none; }
+}
+
+/* reusable diamond crosshatch — sits on any positioned element */
+.crosshatch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 5px, rgb(255 255 255 / 0.09) 5px 10px),
+    repeating-linear-gradient(-45deg, transparent 0 5px, rgb(255 255 255 / 0.09) 5px 10px);
+  pointer-events: none;
+}
+
+/* standalone super gradient — reusable on badges, tiles, pills */
+.super-gradient {
+  background: linear-gradient(
+    90deg,
+    #00d26a, #00b3ff, #3340d6, #8a2be2, #ff2d78, #ff7a00, #ffd400, #00d26a
+  );
+  background-size: 200% 100%;
+  animation: super-shift 4s linear infinite;
+}
+
+@keyframes super-shift {
+  to { background-position: 200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .super-gradient { animation: none; }
+}
